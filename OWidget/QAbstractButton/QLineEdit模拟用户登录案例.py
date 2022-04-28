@@ -1,11 +1,6 @@
-# 创建一个窗口，添加两个文本框，一个按钮
-# 要求：一个用作账号，一个用作密码
-# 点击登陆按钮后，获取账号和密码信息
-# 进行比对账号密码信息，（提前设定正确账号、正确密码）
-# 如果账号错误，则清空账号框和密码框
-# 密码错误则清空密码框
 from PyQt5.Qt import *
 import sys
+
 # 1. 创建一个对象
 app = QApplication(sys.argv)
 
@@ -13,9 +8,8 @@ app = QApplication(sys.argv)
 # 2.1 创建控件
 window = QWidget()
 # 2.2 设置控件
-window.setWindowTitle("用户登陆")
+window.setWindowTitle("模拟用户登录")
 window.resize(500, 500)
-
 le1 = QLineEdit(window)
 le1.move(100, 100)
 le2 = QLineEdit(window)
@@ -69,6 +63,27 @@ def changed():
 action.triggered.connect(changed)
 
 
+# *****************自动补全*****************
+
+completer = QCompleter(["helloworld", "gryffinbit", "fuckyou"], le1)
+le1.setCompleter(completer)
+
+
+
+
+# *****************限制输入内容*****************
+# 最大长度限制
+le1.setMaxLength(5)
+# 只读
+le1.setReadOnly(True)
+le1.setText("不可以色色")
+
+
+
+
+
+
+
 
 
 
@@ -83,6 +98,7 @@ action.triggered.connect(changed)
 
 
 # 2.3 展示控件
+QShortcut(QKeySequence(window.tr("Ctrl+W")), window, window.close)
 window.show()
 # 3. 应用程序的执行
 sys.exit(app.exec())
