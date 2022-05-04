@@ -4,13 +4,19 @@ from PyQt5.Qt import *
 class Window(QWidget):
     def __init__(self):
         super().__init__()
-        QShortcut(QKeySequence(self.tr("Ctrl+W")), self, self.close)
+
+        QShortcut(QKeySequence("Ctrl+W"), self, self.close)
         self.setWindowTitle("快捷键功能测试")
         self.resize(500, 500)
         self.setup_ui()
 
     def setup_ui(self):
+
         kse = QKeySequenceEdit(self)
+        # ks = QKeySequence("Ctrl+C")
+        ks = QKeySequence(QKeySequence.Copy)   # 也可以直接用标准序列的方式来构造
+
+        kse.setKeySequence(ks)
 
 
 #  测试这些类里的功能是否有效，该py下面的类被其他文件调用的时候，不会运行这个main。仅用于功能测试
